@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calories Burned Calculator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #f0f8ff, #e6e6fa);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #007BFF;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.1em;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #28a745;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+        .back-button:hover {
+            background-color: #218838;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calories Burned Calculator</h1>
+        <label for="weight">Weight (in kg):</label>
+        <input type="number" id="weight" placeholder="Enter weight" required>
+
+        <label for="exercise">Select Exercise:</label>
+        <select id="exercise">
+            <option value="5.0">Push-ups</option>
+            <option value="5.6">Abs</option>
+            <option value="5.3">Squats</option>
+            <option value="4.5">Lunges</option>
+            <option value="3.0">Plank</option>
+        </select>
+
+        <button onclick="calculateCalories()">Calculate Calories Burned</button>
+        <a href="Sport_tracker.html" class="back-button">Back to Homepage</a>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateCalories() {
+            const weight = document.getElementById('weight').value;
+            const exerciseMET = parseFloat(document.getElementById('exercise').value);
+
+            if (isNaN(weight) || weight <= 0) {
+                alert('Please enter a valid weight.');
+                return;
+            }
+
+            // Calculate calories burned per minute
+            const caloriesPerMinute = (exerciseMET * weight * 3.5) / 200;
+
+            document.getElementById('result').innerText = `Calories burned per minute: ${caloriesPerMinute.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
